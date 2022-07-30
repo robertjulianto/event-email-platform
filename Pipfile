@@ -14,6 +14,7 @@ flask-apispec = "==0.11.0"
 markupsafe = "~=2.0.1"
 types-simplejson = "~=3.17.5"
 pyjwt = "~=2.4.0"
+pytest = "*"
 
 [dev-packages]
 pytest = "~=7.1.2"
