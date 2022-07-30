@@ -8,8 +8,8 @@ from simplejson import JSONDecoder, JSONEncoder
 from webargs.flaskparser import parser
 from werkzeug.exceptions import HTTPException
 
-from event_email.app.apis import email_api
-from event_email.app.common.exceptions import FailResponse
+from event_email.app.api.apis import email_api
+from event_email.app.api.common.exceptions import FailResponse
 
 app = Flask(__name__)
 app.json_decoder = JSONDecoder  # type: ignore
