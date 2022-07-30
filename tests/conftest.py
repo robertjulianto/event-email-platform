@@ -3,6 +3,7 @@ import os
 import pytest
 from injector import Injector
 
+from event_email.infrastructure.email.module import EmailInfrastructureModule
 from event_email.infrastructure.sqlalchemy.port import ISessionManager
 from tests.adapter.session_manager import FakeSessionManager
 from tests.module import TestEventEmailModule
@@ -13,6 +14,7 @@ def injector():
     os.environ['APP_ENV'] = 'unittest'
     injector = Injector([
         TestEventEmailModule,
+        EmailInfrastructureModule,
     ])
     yield injector
     session_manager: FakeSessionManager = injector.get(ISessionManager)  # noqa
