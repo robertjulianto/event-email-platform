@@ -1,0 +1,100 @@
+@startuml
+
+hide circle
+skinparam linetype ortho
+skinparam shadowing True
+skinparam class {
+    FontColor black
+    BackgroundColor LightYellow
+    BorderColor DarkRed
+    BorderThickness 2
+}
+left to right direction
+
+entity admin {
+    **id: bigserial <<PK>>**
+    --
+    **first_name: varchar**
+    **last_name: varchar**
+    **email: varchar**
+    **password: varchar**
+    **city: varchar**
+    **country: varchar**
+    --
+    **created_at: timestamp**
+    **created_by: varchar**
+    updated_at: timestamp
+    updated_by: varchar
+}
+
+
+entity event {
+    **id: bigserial <<PK>>**
+    --
+    **name: varchar**
+    **description: varchar**
+    **date_time: timestamp**
+    **venue: varchar**
+    **venue_address: varchar**
+    venue_latitude: numeric
+    venue_longitude: numeric
+    **city: varchar**
+    **country: varchar**
+    **pic: varchar**
+    **pic_contact: varchar**
+    --
+    **created_at: timestamp**
+    **created_by: varchar**
+    updated_at: timestamp
+    updated_by: varchar
+}
+
+entity user {
+    **id: bigserial <<PK>>**
+    --
+    **first_name: varchar**
+    **last_name: varchar**
+    **email: varchar**
+    **city: varchar**
+    **country: varchar**
+    --
+    **created_at: timestamp**
+    **created_by: varchar**
+    updated_at: timestamp
+    updated_by: varchar
+}
+
+entity reservation {
+    **id: bigserial <<PK>>**
+    --
+    **event_id: varchar <<FK__event__id>>**
+    **user_id: varchar <<FK__user__id>> **
+    --
+    **created_at: timestamp**
+    **created_by: varchar**
+    updated_at: timestamp
+    updated_by: varchar
+}
+
+entity email {
+    **id: bigserial <<PK>>**
+    --
+    **event_id: varchar <<FK__event__id>>**
+    **subject: varchar**
+    **content: varchar**
+    **timestamp: timestamp**
+    --
+    **created_at: timestamp**
+    **created_by: varchar**
+    updated_at: timestamp
+    updated_by: varchar
+}
+
+
+admin ||..o{ event
+admin ||..o{ email
+reservation ||..|{ event
+user ||..o{ reservation
+event ||..o{ email
+
+@enduml
