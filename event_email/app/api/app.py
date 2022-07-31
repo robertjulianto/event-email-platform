@@ -1,14 +1,12 @@
 import os
 
 from flask import Flask, jsonify, request
-
 from marshmallow import ValidationError
 from simplejson import JSONDecoder, JSONEncoder
-
 from webargs.flaskparser import parser
 from werkzeug.exceptions import HTTPException
 
-from event_email.app.api.apis import email_api
+from event_email.app.api.apis import email_api, event_api
 from event_email.app.api.common.exceptions import FailResponse
 
 app = Flask(__name__)
@@ -16,6 +14,7 @@ app.json_decoder = JSONDecoder  # type: ignore
 app.json_encoder = JSONEncoder  # type: ignore
 
 app.register_blueprint(email_api.blp, url_prefix="/api/email")
+app.register_blueprint(event_api.blp, url_prefix="/api/event")
 
 if os.getenv('APP_ENV') in ['local']:
     from apispec import APISpec
