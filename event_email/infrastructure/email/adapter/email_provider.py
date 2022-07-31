@@ -41,7 +41,7 @@ class EmailProvider(IEmailProvider):
                 )
             ).user_email_addresses
             msg = EmailMessage()
-            msg['From'] = email_data.created_by
+            msg['From'] = self.smtp_user
             msg['Subject'] = email_data.subject
             msg.set_content(email_data.content)
             with smtplib.SMTP(host=self.smtp_host, port=int(self.smtp_port)) as server:
