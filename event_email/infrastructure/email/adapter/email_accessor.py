@@ -35,5 +35,5 @@ class EmailAccessor(IEmailAccessor):
             Email.created_by
         ).where(Email.id == accessor_spec.email_id)
         with self.session_manager.get_session_scope() as sess:
-            result = sess.execute(get_email_query).scalar()
+            result = sess.execute(get_email_query).first()
         return GetEmailByIdAccessorResult(**result)

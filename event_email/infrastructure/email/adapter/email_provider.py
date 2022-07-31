@@ -4,6 +4,7 @@ from email.message import EmailMessage
 
 from injector import inject
 
+from event_email.core.common.port.logger import ILogger
 from event_email.core.email.port.email_accessor import IEmailAccessor, GetEmailByIdAccessorSpec
 from event_email.infrastructure.email.port.email_provider import IEmailProvider, SendEmailProviderSpec
 from event_email.infrastructure.reservation.port.reservation_accessor import IReservationAccessor, \
@@ -16,14 +17,16 @@ class EmailProvider(IEmailProvider):
     def __init__(
             self,
             email_accessor: IEmailAccessor,
-            reservation_accessor: IReservationAccessor
+            reservation_accessor: IReservationAccessor,
+            logger: ILogger
     ):
         self.email_accessor = email_accessor
         self.reservation_accessor = reservation_accessor
-        self.smtp_host = os.getenv("SMTP_HOST")
-        self.smtp_port = os.getenv("SMTP_PORT")
-        self.smtp_user = os.getenv("SMTP_USER")
-        self.smtp_password = os.getenv("SMTP_PASSWORD")
+        self.logger = logger
+        self.smtp_host = os.getenv("CELERY_SMTP_HOST")
+        self.smtp_port = os.getenv("CELERY_SMTP_PORT")
+        self.smtp_user = os.getenv("CELERY_SMTP_USER")
+        self.smtp_password = os.getenv("CELERY_SMTP_PASSWORD")
 
     def send_email(self, provider_spec: SendEmailProviderSpec) -> None:
         try:
@@ -48,5 +51,6 @@ class EmailProvider(IEmailProvider):
                 for email in reserved_email_addresses:
                     msg['To'] = email
                     server.send_message(msg=msg)
-        except smtplib.SMTPException:
+        except smtplib.SMTPException as e:
+            self.logger.error(str(e), exception=e)
             pass
