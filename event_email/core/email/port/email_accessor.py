@@ -46,11 +46,17 @@ class GetPaginatedEmailsAccessorResultItem:
     email_content: str
     created_at: datetime
     created_by: str
+    sent_at: Optional[datetime]
 
 
 @dataclass
 class GetPaginatedEmailsAccessorResult(PaginatedResult):
     emails: List[Optional[GetPaginatedEmailsAccessorResultItem]]
+
+
+@dataclass
+class UpdateSentAtEmailAccessorSpec:
+    id: int
 
 
 class IEmailAccessor(ABC):
@@ -65,4 +71,8 @@ class IEmailAccessor(ABC):
 
     @abstractmethod
     def get_paginated_emails(self, accessor_spec: GetPaginatedEmailsAccessorSpec) -> GetPaginatedEmailsAccessorResult:
+        raise NotImplementedError
+
+    @abstractmethod
+    def update_sent_at_email(self, accessor_spec: UpdateSentAtEmailAccessorSpec) -> None:
         raise NotImplementedError

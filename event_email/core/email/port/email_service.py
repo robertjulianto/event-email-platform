@@ -32,6 +32,7 @@ class GetPaginatedEmailResultItem:
     email_content: str
     created_at: datetime
     created_by: str
+    sent_at: Optional[datetime]
 
 
 @dataclass
