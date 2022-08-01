@@ -111,3 +111,7 @@ CREATE TABLE ${database.defaultSchemaName}.email
 --changeset robert.julianto:add-index-email-event_id
 CREATE INDEX email__reservation_id__idx
     ON ${database.defaultSchemaName}.email(event_id);
+
+--changeset robert.julianto:add-sent_at-column-on-email
+ALTER TABLE ${database.defaultSchemaName}.email
+    ADD COLUMN sent_at TIMESTAMPTZ;

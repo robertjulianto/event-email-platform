@@ -86,6 +86,7 @@ mapper(
         Column('subject', String),
         Column('content', String),
         Column('timestamp', DateTime),
+        Column('sent_at', DateTime),
         Column('created_at', DateTime, FetchedValue()),
         Column('created_by', String, FetchedValue()),
         Column('updated_at', DateTime, FetchedValue()),

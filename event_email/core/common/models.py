@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
+from typing import Optional
 
 
 @dataclass
@@ -64,6 +65,7 @@ class Email:
     created_at: datetime
     updated_by: str
     updated_at: datetime
+    sent_at: Optional[datetime] = None
 
 
 @dataclass
