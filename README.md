@@ -36,6 +36,14 @@ the options, run this command:
 ./scripts/liquibase.sh --help
 ```
 
+## Note
+You need to setup environment variable, especially in `docker-compose.yml` 
+- `CELERY_SMTP_HOST`
+- `CELERY_SMTP_PORT`
+- `CELERY_SMTP_USER`
+- `CELERY_SMTP_PASSWORD`
+
+
 ## Preparation
 
 1. Open terminal into your project directory and install library using pipenv command
