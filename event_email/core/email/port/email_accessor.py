@@ -40,7 +40,7 @@ class GetPaginatedEmailsAccessorSpec(PaginatedSpec):
 
 @dataclass
 class GetPaginatedEmailsAccessorResultItem:
-    email_id: str
+    email_id: int
     event_name: str
     email_subject: str
     email_content: str

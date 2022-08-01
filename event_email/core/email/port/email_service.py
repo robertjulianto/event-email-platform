@@ -26,7 +26,7 @@ class GetPaginatedEmailSpec(PaginatedSpec):
 
 @dataclass
 class GetPaginatedEmailResultItem:
-    email_id: str
+    email_id: int
     event_name: str
     email_subject: str
     email_content: str
