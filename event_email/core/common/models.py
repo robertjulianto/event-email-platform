@@ -64,3 +64,15 @@ class Email:
     created_at: datetime
     updated_by: str
     updated_at: datetime
+
+
+@dataclass
+class PaginatedSpec:
+    page: int
+    take: int
+
+
+@dataclass
+class PaginatedResult:
+    page: int
+    total: int

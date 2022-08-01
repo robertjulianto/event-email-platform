@@ -1,6 +1,9 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Optional, List
+
+from event_email.core.common.models import PaginatedSpec, PaginatedResult
 
 
 @dataclass
@@ -30,6 +33,36 @@ class GetEmailByIdAccessorResult:
     created_by: str
 
 
+@dataclass
+class GetPaginatedEmailsAccessorSpec(PaginatedSpec):
+    pass
+
+
+@dataclass
+class GetPaginatedEmailsAccessorResultItem:
+    email_id: str
+    event_name: str
+    email_subject: str
+    email_content: str
+    created_at: datetime
+    created_by: str
+
+
+@dataclass
+class GetPaginatedEmailsAccessorResultItem:
+    email_id: str
+    event_name: str
+    email_subject: str
+    email_content: str
+    created_at: datetime
+    created_by: str
+
+
+@dataclass
+class GetPaginatedEmailsAccessorResult(PaginatedResult):
+    emails: List[Optional[GetPaginatedEmailsAccessorResultItem]]
+
+
 class IEmailAccessor(ABC):
 
     @abstractmethod
@@ -38,4 +71,8 @@ class IEmailAccessor(ABC):
 
     @abstractmethod
     def get_email_by_id(self, accessor_spec: GetEmailByIdAccessorSpec) -> GetEmailByIdAccessorResult:
+        raise NotImplementedError
+
+    @abstractmethod
+    def get_paginated_emails(self, accessor_spec: GetPaginatedEmailsAccessorSpec) -> GetPaginatedEmailsAccessorResult:
         raise NotImplementedError
