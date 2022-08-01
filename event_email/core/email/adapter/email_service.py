@@ -17,7 +17,7 @@ class EmailService(IEmailService):
         self.logger = logger
         self.email_accessor = email_accessor
 
-    def create_email(self, spec: SaveEmailSpec) -> SaveEmailResult:
+    def create_email(self, spec: SaveEmailSpec, username: str) -> SaveEmailResult:
         try:
             return SaveEmailResult(
                 email_id=self.email_accessor.create_email(
@@ -26,7 +26,7 @@ class EmailService(IEmailService):
                         subject=spec.email_subject,
                         content=spec.email_content,
                         timestamp=spec.timestamp,
-                        created_by=spec.created_by
+                        created_by=username
                     )
                 ).email_id
             )

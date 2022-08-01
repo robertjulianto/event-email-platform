@@ -9,7 +9,6 @@ class SaveEmailSpec:
     email_subject: str
     email_content: str
     timestamp: datetime
-    created_by: str
 
 
 @dataclass
@@ -20,5 +19,5 @@ class SaveEmailResult:
 class IEmailService(ABC):
 
     @abstractmethod
-    def create_email(self, spec: SaveEmailSpec) -> SaveEmailResult:
+    def create_email(self, spec: SaveEmailSpec, user_name: str) -> SaveEmailResult:
         raise NotImplementedError

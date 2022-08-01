@@ -14,7 +14,7 @@ class GenerateTokenResult:
 
 @dataclass
 class AdminContext:
-    admin_email: str
+    username: str
 
 
 class IAuthenticationService(ABC):
