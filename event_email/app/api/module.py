@@ -3,6 +3,8 @@ from typing import no_type_check
 from injector import Module, Binder, singleton
 
 from event_email.app.api.common.adapter import SessionManager
+from event_email.core.admin.adapter.admin_service import AdminService
+from event_email.core.admin.port.admin_service import IAdminService
 from event_email.core.common.port.logger import ILogger
 from event_email.core.email.adapter.email_service import EmailService
 from event_email.core.email.port.email_service import IEmailService
@@ -19,3 +21,4 @@ class EventEmailModule(Module):
         binder.bind(ILogger, to=Logger, scope=singleton)
         binder.bind(IEmailService, to=EmailService, scope=singleton)
         binder.bind(IEventService, to=EventService, scope=singleton)
+        binder.bind(IAdminService, to=AdminService, scope=singleton)

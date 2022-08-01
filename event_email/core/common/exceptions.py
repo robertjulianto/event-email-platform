@@ -17,3 +17,11 @@ class EntityAlreadyExistsException(EventEmailGeneralException):
 
     def __str__(self):
         return self.message
+
+
+class LoginFailException(Exception):
+    message = "Login fail."
+    error_code = "LOGIN_FAIL_EXCEPTION"
+
+    def __str__(self):
+        return self.message
