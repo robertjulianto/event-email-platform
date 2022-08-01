@@ -43,7 +43,7 @@ class GetPaginatedEmailResult(PaginatedResult):
 class IEmailService(ABC):
 
     @abstractmethod
-    def create_email(self, spec: SaveEmailSpec, user_name: str) -> SaveEmailResult:
+    def create_email(self, spec: SaveEmailSpec, username: str) -> SaveEmailResult:
         raise NotImplementedError
 
     @abstractmethod

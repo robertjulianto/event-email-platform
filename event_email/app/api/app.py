@@ -12,8 +12,8 @@ from event_email.app.api.common.exceptions import FailResponse
 
 app = Flask(__name__)
 CORS(app)
-app.json_decoder = JSONDecoder
-app.json_encoder = JSONEncoder
+app.json_decoder = JSONDecoder  # type: ignore
+app.json_encoder = JSONEncoder  # type: ignore
 
 app.register_blueprint(email_api.blp, url_prefix="/api/email")
 app.register_blueprint(event_api.blp, url_prefix="/api/event")

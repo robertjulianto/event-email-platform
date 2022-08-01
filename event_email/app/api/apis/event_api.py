@@ -8,7 +8,7 @@ from event_email.core.event.port.event_service import GetUpcomingEventsResult, I
 
 blp = Blueprint('event', __name__)
 
-event_service = injector.get(IEventService)
+event_service = injector.get(IEventService)  # type: ignore
 
 
 class GetUpcomingEventsResponseItem(EventEmailSchema):
