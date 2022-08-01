@@ -22,8 +22,9 @@ class SessionManager(ISessionManager):
     ):
         env = os.getenv('APP_ENV')
         echo = env == 'local'
+        self.DB_HOST = os.getenv('DB_HOST')
         self.DB_NAME = 'event_email'
-        self.engine = create_engine(f'postgresql://postgres:postgrespassword@localhost/{self.DB_NAME}', echo=echo)
+        self.engine = create_engine(f'postgresql://postgres:postgrespassword@{self.DB_HOST}/{self.DB_NAME}', echo=echo)
         self.session_factory = sessionmaker(bind=self.engine)
         self.Session = scoped_session(self.session_factory)
         self.logger = logger

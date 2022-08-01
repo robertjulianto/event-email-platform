@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+  api:
+    build: .
+    container_name: event_email_api
+    ports:
+      - "5000:5000"
+    environment:
+      - APP_ENV=local
+      - FLASK_ENV=local
+      - FLASK_APP=event_email/app/api/app.py
+      - FLASK_RUN_HOST=0.0.0.0
+      - PYTHONPATH=event_email:${PYTHONPATH}
+      - DB_HOST=event_email_postgresql
+      - CELERY_BROKER_URL=amqp://rabbitmq:rabbitmqpassword@event_email_rabbitmq:5672
+    depends_on:
+      - rabbitmq
+      - postgresql
+    volumes:
+      - .:/code
+    command: ["python", "-m", "flask", "run"]
+
+  worker:
+    build: .
+    container_name: event_email_worker
+    environment:
+      - CELERY_BROKER_URL=amqp://rabbitmq:rabbitmqpassword@event_email_rabbitmq:5672
+      - CELERY_SMTP_HOST=CELERY_SMTP_HOST
+      - CELERY_SMTP_PORT=CELERY_SMTP_PORT
+      - CELERY_SMTP_USER=CELERY_SMTP_USER
+      - CELERY_SMTP_PASSWORD=CELERY_SMTP_PASSWORD
+      - DB_HOST=event_email_postgresql
+    depends_on:
+      - rabbitmq
+      - postgresql
+    volumes:
+      - .:/code
+    command: ["celery", "-A", "event_email.app.worker.main_task", "worker", "--loglevel=info", "--pool=solo"]
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: event_email_rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=rabbitmqpassword
+    expose:
+      - 5672
+
+  postgresql:
+    image: postgres:latest
+    container_name: event_email_postgresql
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgrespassword
+      - POSTGRES_DB=event_email

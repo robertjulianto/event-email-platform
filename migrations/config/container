@@ -1,0 +1,3 @@
+url: jdbc:postgresql://event_email_postgresql:5432/event_email
+username: postgres
+password: postgrespassword
