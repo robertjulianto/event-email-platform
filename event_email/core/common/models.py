@@ -19,7 +19,7 @@ class User:
 
 @dataclass
 class Admin(User):
-    pass
+    password: str
 
 
 @dataclass

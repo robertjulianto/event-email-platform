@@ -30,6 +30,7 @@ mapper(
         Column('first_name', String),
         Column('last_name', String),
         Column('email', String),
+        Column('password', String),
         Column('city', String),
         Column('country', String),
         Column('created_at', DateTime, FetchedValue()),
