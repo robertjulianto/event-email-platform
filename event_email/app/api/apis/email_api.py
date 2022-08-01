@@ -14,7 +14,7 @@ from event_email.core.email.port.email_service import IEmailService, SaveEmailSp
 
 blp = Blueprint('email', __name__)
 
-email_service = injector.get(IEmailService)  # type: ignore
+email_service = injector.get(IEmailService)
 
 
 class SaveEmailsRequest(EventEmailSchema):

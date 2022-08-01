@@ -8,8 +8,8 @@ from event_email.infrastructure.email.port.email_provider import IEmailProvider,
 
 app = Celery('main_task', broker=os.getenv('CELERY_BROKER_URL'))
 
-logger = injector.get(ILogger)  # type: ignore
-email_provider = injector.get(IEmailProvider)  # type: ignore
+logger = injector.get(ILogger)
+email_provider = injector.get(IEmailProvider)
 
 
 @app.task

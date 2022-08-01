@@ -42,10 +42,10 @@ class EmailAccessor(IEmailAccessor):
     def get_paginated_emails(self, accessor_spec: GetPaginatedEmailsAccessorSpec) -> GetPaginatedEmailsAccessorResult:
         offset_value = (accessor_spec.page - 1) * accessor_spec.take
         get_emails_query = select(
-            Email.id.label('email_id'),
-            Event.name.label('event_name'),
-            Email.subject.label('email_subject'),
-            Email.content.label('email_content'),
+            Email.id.label('email_id'),  # type: ignore
+            Event.name.label('event_name'),  # type: ignore
+            Email.subject.label('email_subject'),  # type: ignore
+            Email.content.label('email_content'),  # type: ignore
             Email.created_at,
             Email.created_by,
         ).join_from(Email, Event).order_by(desc(Email.created_at)).limit(accessor_spec.take).offset(offset_value)

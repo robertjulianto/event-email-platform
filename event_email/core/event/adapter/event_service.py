@@ -1,23 +1,8 @@
-from dataclasses import dataclass
-from datetime import datetime
-from typing import List
-
 from injector import inject
 
 from event_email.core.event.port.event_accessor import IEventAccessor
-from event_email.core.event.port.event_service import IEventService
-
-
-@dataclass
-class GetUpcomingEventResultItem:
-    event_id: int
-    event_name: str
-    event_date_time: datetime
-
-
-@dataclass
-class GetUpcomingEventResult:
-    events: List[GetUpcomingEventResultItem]
+from event_email.core.event.port.event_service import IEventService, GetUpcomingEventsResult, \
+    GetUpcomingEventsResultItem
 
 
 class EventService(IEventService):
@@ -29,11 +14,11 @@ class EventService(IEventService):
     ):
         self.event_accessor = event_accessor
 
-    def get_upcoming_events(self) -> GetUpcomingEventResult:
+    def get_upcoming_events(self) -> GetUpcomingEventsResult:
         result = self.event_accessor.get_upcoming_events()
-        return GetUpcomingEventResult(
+        return GetUpcomingEventsResult(
             events=[
-                GetUpcomingEventResultItem(
+                GetUpcomingEventsResultItem(
                     event_id=e.id,
                     event_name=e.name,
                     event_date_time=e.date_time

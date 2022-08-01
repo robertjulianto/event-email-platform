@@ -23,4 +23,4 @@ def injector():
 
 @pytest.fixture
 def session_manager(injector: Injector):
-    return injector.get(ISessionManager)  # type: ignore
+    return injector.get(ISessionManager)

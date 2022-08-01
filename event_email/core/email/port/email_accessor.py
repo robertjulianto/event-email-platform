@@ -49,16 +49,6 @@ class GetPaginatedEmailsAccessorResultItem:
 
 
 @dataclass
-class GetPaginatedEmailsAccessorResultItem:
-    email_id: str
-    event_name: str
-    email_subject: str
-    email_content: str
-    created_at: datetime
-    created_by: str
-
-
-@dataclass
 class GetPaginatedEmailsAccessorResult(PaginatedResult):
     emails: List[Optional[GetPaginatedEmailsAccessorResultItem]]
 

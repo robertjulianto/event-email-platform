@@ -10,7 +10,7 @@ from event_email.core.common.exceptions import LoginFailException
 
 blp = Blueprint('admin', __name__)
 
-admin_service = injector.get(IAdminService)  # type: ignore
+admin_service = injector.get(IAdminService)
 
 
 class LoginRequest(EventEmailSchema):
