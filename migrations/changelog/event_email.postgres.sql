@@ -115,3 +115,6 @@ CREATE INDEX email__reservation_id__idx
 --changeset robert.julianto:add-sent_at-column-on-email
 ALTER TABLE ${database.defaultSchemaName}.email
     ADD COLUMN sent_at TIMESTAMPTZ;
+
+--changeset robert.julianto:change-timezone-to-singapore
+SET timezone TO 'Asia/Singapore';
