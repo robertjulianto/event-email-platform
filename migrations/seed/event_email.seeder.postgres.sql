@@ -46,7 +46,8 @@ INSERT INTO ${database.defaultSchemaName}.event (
     ('Aggregate Robust Supply-Chains', 'Mauris lacinia sapien quis libero.', '2022-09-27T05:19:37Z', 'Wikizz', '6 Tennyson Circle', -33.1519145, 18.6642088, 'Moorreesburg', 'South Africa', 'Sherwin Legat', '171-684-4856', 'ihumbles0@blogspot.com'),
     ('Harness Efficient E-Markets', 'Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum.', '2022-01-31T13:38:07Z', 'Babbleblab', '01 Valley Edge Drive', 39.6445351, -8.5226286, 'Alburitel', 'Portugal', 'Roger Duquesnay', '615-588-2355', 'hsimonel1@blogtalkradio.com'),
     ('Cultivate Proactive Web Services', 'Nulla tellus. In sagittis dui vel nisl.', '2021-11-13T15:48:28Z', 'Mydo', '34 Erie Lane', 52.300713, -1.6462357, 'Hatton', 'United Kingdom', 'Carree Ibel', '592-453-8956', 'ihumbles0@blogspot.com'),
-    ('Leverage Robust E-commerce', 'Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh.', '2022-08-02T02:45:15Z', 'Youspan', '94 Fuller Parkway', 54.9787385, 83.1136054, 'Novolugovoye', 'Russia', 'Pryce Moye', '634-364-7065', 'hsimonel1@blogtalkradio.com');
+    ('Leverage Robust E-commerce', 'Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh.', '2022-08-02T02:45:15Z', 'Youspan', '94 Fuller Parkway', 54.9787385, 83.1136054, 'Novolugovoye', 'Russia', 'Pryce Moye', '634-364-7065', 'hsimonel1@blogtalkradio.com'),
+    ('Big Data and IoT', 'Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh.', '2023-08-02T02:45:15Z', 'Youspan', '94 Fuller Parkway', 54.9787385, 83.1136054, 'Novolugovoye', 'Russia', 'Pryce Moye', '634-364-7065', 'hsimonel1@blogtalkradio.com');
 
 --changeset robert.julianto:init-data-reservation
 INSERT INTO ${database.defaultSchemaName}.reservation (event_id, user_id) VALUES
@@ -94,4 +95,5 @@ INSERT INTO ${database.defaultSchemaName}.reservation (event_id, user_id) VALUES
     (3, 3),
     (2, 6),
     (3, 14),
-    (4, 29);
+    (4, 29),
+    (5, 1);

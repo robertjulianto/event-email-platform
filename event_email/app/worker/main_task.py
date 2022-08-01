@@ -14,7 +14,7 @@ email_provider = injector.get(IEmailProvider)
 
 @app.task
 def send_email(email_id: int):
-    logger.info("Sending email....")
+    logger.info(f"Sending email with id {email_id}....")
     email_provider.send_email(
         provider_spec=SendEmailProviderSpec(
             email_id=email_id
