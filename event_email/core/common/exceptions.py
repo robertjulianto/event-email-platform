@@ -25,3 +25,12 @@ class LoginFailException(Exception):
 
     def __str__(self):
         return self.message
+
+
+class InvalidTokenError(EventEmailGeneralException):
+    error_code = 'INVALID_TOKEN_ERROR'
+
+
+class ExpiredTokenError(EventEmailGeneralException):
+    error_code = 'EXPIRED_TOKEN_ERROR'
+
