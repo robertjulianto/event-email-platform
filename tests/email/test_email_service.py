@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from pytest_bdd import scenario, given, parsers, when, then
 from sqlalchemy import select
 
@@ -78,8 +76,8 @@ def i_create_scheduled_email(injector, admin_spec, event_spec, date_time_spec, e
             email_subject=email_subject_spec,
             email_content=email_content_spec,
             timestamp=date_time_spec,
-            created_by=admin_spec.email
-        )
+        ),
+        username=admin_spec.email
     )
 
 
