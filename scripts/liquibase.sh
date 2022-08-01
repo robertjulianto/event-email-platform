@@ -23,7 +23,7 @@ changelog="event_email"
 env="local"
 use_seeder="false"
 network_name="default"
-container_name="postgresql"
+container_name="postgres"
 
 while getopts e:sh option; do
   case $option in
@@ -47,15 +47,31 @@ if [ "$env" == "container" ]
     network_name="event-email-platform_default"
   fi
 
-docker run --rm -v $(pwd)/migrations/changelog:/liquibase/changelog -v $(pwd)/migrations/config:/liquibase/config \
-  --link="$container_name" --network="$network_name" --entrypoint=/liquibase/liquibase liquibase/liquibase --logLevel=debug \
-  --changeLogFile=changelog/"$changelog".postgres.sql --defaultsFile=/liquibase/config/"$env" \
-  --defaultSchemaName="$changelog" update
-
-if [ "$use_seeder" == "true" ]
+if [ "$network_name" == "default" ]
   then
-    docker run --rm -v $(pwd)/migrations/seed:/liquibase/seed -v $(pwd)/migrations/config:/liquibase/config \
-      --link="$container_name" --network="$network_name" --entrypoint=/liquibase/liquibase liquibase/liquibase --logLevel=debug \
-      --changeLogFile=seed/"$changelog".seeder.postgres.sql --defaultsFile=/liquibase/config/"$env" \
+    docker run --rm -v $(pwd)/migrations/changelog:/liquibase/changelog -v $(pwd)/migrations/config:/liquibase/config \
+      --link="$container_name" --entrypoint=/liquibase/liquibase liquibase/liquibase --logLevel=debug \
+      --changeLogFile=changelog/"$changelog".postgres.sql --defaultsFile=/liquibase/config/"$env" \
       --defaultSchemaName="$changelog" update
+
+    if [ "$use_seeder" == "true" ]
+      then
+        docker run --rm -v $(pwd)/migrations/seed:/liquibase/seed -v $(pwd)/migrations/config:/liquibase/config \
+          --link="$container_name" --entrypoint=/liquibase/liquibase liquibase/liquibase --logLevel=debug \
+          --changeLogFile=seed/"$changelog".seeder.postgres.sql --defaultsFile=/liquibase/config/"$env" \
+          --defaultSchemaName="$changelog" update
+      fi
+else
+    docker run --rm -v $(pwd)/migrations/changelog:/liquibase/changelog -v $(pwd)/migrations/config:/liquibase/config \
+      --link="$container_name" --network="$network_name" --entrypoint=/liquibase/liquibase liquibase/liquibase --logLevel=debug \
+      --changeLogFile=changelog/"$changelog".postgres.sql --defaultsFile=/liquibase/config/"$env" \
+      --defaultSchemaName="$changelog" update
+
+    if [ "$use_seeder" == "true" ]
+      then
+        docker run --rm -v $(pwd)/migrations/seed:/liquibase/seed -v $(pwd)/migrations/config:/liquibase/config \
+          --link="$container_name" --network="$network_name" --entrypoint=/liquibase/liquibase liquibase/liquibase --logLevel=debug \
+          --changeLogFile=seed/"$changelog".seeder.postgres.sql --defaultsFile=/liquibase/config/"$env" \
+          --defaultSchemaName="$changelog" update
+      fi
   fi
