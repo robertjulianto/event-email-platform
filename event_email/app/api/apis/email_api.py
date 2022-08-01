@@ -65,6 +65,7 @@ class GetPaginatedEmailsResponseEmailsItem(EventEmailSchema):
     email_content = fields.Str()
     created_at = fields.DateTime()
     created_by = fields.Str()
+    sent_at = fields.DateTime()
 
 
 class GetPaginatedEmailsResponse(EventEmailSchema):
