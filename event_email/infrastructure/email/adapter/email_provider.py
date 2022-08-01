@@ -5,7 +5,8 @@ from email.message import EmailMessage
 from injector import inject
 
 from event_email.core.common.port.logger import ILogger
-from event_email.core.email.port.email_accessor import IEmailAccessor, GetEmailByIdAccessorSpec
+from event_email.core.email.port.email_accessor import IEmailAccessor, GetEmailByIdAccessorSpec, \
+    UpdateSentAtEmailAccessorSpec
 from event_email.infrastructure.email.port.email_provider import IEmailProvider, SendEmailProviderSpec
 from event_email.infrastructure.reservation.port.reservation_accessor import IReservationAccessor, \
     GetReservationEmailsByEventIdAccessorSpec
@@ -40,6 +41,11 @@ class EmailProvider(IEmailProvider):
                     event_id=email_data.event_id
                 )
             ).user_email_addresses
+            self.email_accessor.update_sent_at_email(
+                accessor_spec=UpdateSentAtEmailAccessorSpec(
+                    id=provider_spec.email_id
+                )
+            )
             msg = EmailMessage()
             msg['From'] = self.smtp_user
             msg['Subject'] = email_data.subject
